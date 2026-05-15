@@ -15,7 +15,9 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [],
+  modules: ['@nuxtjs/tailwindcss'],
+
+  css: ['~/assets/css/main.css'],
 
   typescript: {
     strict: true,

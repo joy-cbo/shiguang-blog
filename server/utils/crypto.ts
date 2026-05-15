@@ -1,7 +1,8 @@
-// PBKDF2-SHA256 密码哈希 — OWASP 推荐
-// 格式: $pbkdf2-sha256$600000$<salt_hex>$<hash_hex>
+// PBKDF2-SHA256 密码哈希
+// 格式: $pbkdf2-sha256$10000$<salt_hex>$<hash_hex>
+// 注：降到10000次以适配 Cloudflare Workers CPU 限制
 
-const ITERATIONS = 600_000
+const ITERATIONS = 10_000
 const KEY_LEN = 32
 const SALT_LEN = 16
 
