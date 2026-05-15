@@ -9,7 +9,7 @@ binding = "DB"
 database_name = "blog-db"
 database_id = "378a7bee-3dc9-428e-b4fd-9da51dafb7aa"
 
-# R2 存储桶绑定（需要绑卡才能用，暂时注释）
-# [[r2_buckets]]
-# binding = "R2"
-# bucket_name = "blog-files"
+# R2 存储桶绑定
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "blog-files"
