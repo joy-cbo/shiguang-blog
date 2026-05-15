@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+.nuxt/
+dist/
+
+# Env
+.env
+.dev.vars
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

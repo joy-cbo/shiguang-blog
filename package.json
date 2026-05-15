@@ -1,0 +1,19 @@
+{
+  "name": "blog",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "nuxt": "^3.16.0"
+  },
+  "dependencies": {
+    "@tiptap/extension-placeholder": "^3.23.4",
+    "@tiptap/starter-kit": "^3.23.4",
+    "@tiptap/vue-3": "^3.23.4"
+  }
+}

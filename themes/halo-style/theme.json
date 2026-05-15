@@ -1,0 +1,15 @@
+{
+  "name": "halo-style",
+  "version": "1.0.0",
+  "author": "Hermes",
+  "description": "Halo 风格主题 — 简约、优雅、卡片式布局",
+  "screenshot": "screenshot.png",
+  "layout": "halo.vue",
+  "features": [
+    "毛玻璃导航栏",
+    "卡片式文章列表",
+    "渐变封面图",
+    "优雅排版",
+    "暗黑模式兼容"
+  ]
+}

@@ -1,0 +1,16 @@
+# Cloudflare Pages + D1 配置
+# 部署后在 Cloudflare 后台 Pages 项目设置中绑定 D1 数据库（变量名 DB）
+
+name = "blog"
+compatibility_date = "2025-05-15"
+pages_build_output_dir = "dist"
+
+# D1 数据库绑定（部署后在后台配置 database_id）
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "blog-db"
+# database_id = ""
+
+# 环境变量（在 Cloudflare 后台设置，不要提交真实值）
+# [vars]
+# JWT_SECRET = "your-secret-here"
