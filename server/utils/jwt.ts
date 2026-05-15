@@ -1,13 +1,13 @@
 // JWT 工具 — HMAC-SHA256 token 生成与验证
 import type { JwtPayload } from '~~/types'
 
-const JWT_SECRET = (() => {
-  const secret = process.env.JWT_SECRET
+const _getJWTSecret = (): string => {
+  const secret = process.env.JWT_SECRET || ''
   if (!secret) {
-    throw new Error('❌ JWT_SECRET 未设置。请在 Cloudflare Pages 后台添加环境变量，或在 .dev.vars 中设置。')
+    throw createError({ statusCode: 500, message: '❌ JWT_SECRET 未设置。请在 Cloudflare Pages 后台添加环境变量。' })
   }
   return secret
-})()
+}
 
 function base64Url(str: string): string {
   return btoa(str).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
@@ -26,7 +26,7 @@ export async function createToken(payload: JwtPayload): Promise<string> {
   const hb64 = base64Url(JSON.stringify(header))
   const pb64 = base64Url(JSON.stringify(data))
 
-  const key = await crypto.subtle.importKey('raw', enc.encode(JWT_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'])
+  const key = await crypto.subtle.importKey('raw', enc.encode(_getJWTSecret()), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'])
   const sig = await crypto.subtle.sign('HMAC', key, enc.encode(`${hb64}.${pb64}`))
   const sb64 = base64Url(String.fromCharCode(...new Uint8Array(sig)))
 
@@ -42,7 +42,7 @@ export async function verifyToken(token: string): Promise<JwtPayload | null> {
     if (payload.exp < Math.floor(Date.now() / 1000)) return null
 
     const enc = new TextEncoder()
-    const key = await crypto.subtle.importKey('raw', enc.encode(JWT_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify'])
+    const key = await crypto.subtle.importKey('raw', enc.encode(_getJWTSecret()), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify'])
     const sigStr = parts[2].replace(/-/g, '+').replace(/_/g, '/')
     const sigData = Uint8Array.from(base64UrlDecode(sigStr), c => c.charCodeAt(0))
     const valid = await crypto.subtle.verify('HMAC', key, sigData, enc.encode(`${parts[0]}.${parts[1]}`))
