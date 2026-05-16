@@ -1,0 +1,2 @@
+import{f as a,a as s}from"../../../nitro/nitro.mjs";import{g as t}from"../../../_/db.mjs";const r=a(async a=>{var r,i;const o=t(a),e=null==(i=null==(r=a.context)?void 0:r.params)?void 0:i.id,n=parseInt(e),p=!isNaN(n)&&String(n)===e,d=await o.prepare(`SELECT * FROM pages WHERE ${p?"id":"slug"} = ?`).bind(p?n:e).first();if(!d)throw s({statusCode:404,message:"页面不存在"});return{page:d}});export{r as default};
+//# sourceMappingURL=_id_.get.mjs.map

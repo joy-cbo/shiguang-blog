@@ -118,7 +118,7 @@ export default defineEventHandler(async (event) => {
   <circle cx="760" cy="380" r="15" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
 </svg>`
 
-  event.headers.set('Content-Type', 'image/svg+xml')
-  event.headers.set('Cache-Control', 'public, max-age=86400')
+  event.node.res.setHeader('Content-Type', 'image/svg+xml')
+  event.node.res.setHeader('Cache-Control', 'public, max-age=86400')
   return svg
 })

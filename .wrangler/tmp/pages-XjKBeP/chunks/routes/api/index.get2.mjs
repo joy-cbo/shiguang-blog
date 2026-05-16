@@ -1,0 +1,2 @@
+import{f as t}from"../../nitro/nitro.mjs";import{g as s}from"../../_/db.mjs";const a=t(async t=>{const a=s(t);return{categories:(await a.prepare("SELECT c.*, COUNT(p.id) as post_count FROM categories c LEFT JOIN posts p ON c.id = p.category_id AND p.deleted_at IS NULL AND p.status = 'published' GROUP BY c.id ORDER BY c.id").all()).results||[]}});export{a as default};
+//# sourceMappingURL=index.get2.mjs.map

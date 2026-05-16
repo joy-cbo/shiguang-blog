@@ -8,7 +8,7 @@
           <div class="grid gap-6">
             <article v-for="post in posts" :key="post.id" class="border-b dark:border-gray-700 pb-6 flex gap-4">
               <NuxtLink :to="`/posts/${post.slug}`" class="shrink-0 hidden sm:block">
-                <img :src="post.cover || `/api/cover/${post.slug}`" :alt="post.title" class="w-32 h-20 object-cover rounded-lg bg-gray-200 dark:bg-gray-700" />
+                <object :data="post.cover || `/api/cover/${post.slug}`" type="image/svg+xml" class="w-32 h-20 rounded-lg bg-gray-200 dark:bg-gray-700"></object>
               </NuxtLink>
               <div class="flex-1 min-w-0">
                 <div v-if="post.is_pinned" class="text-orange-500 text-xs mb-1">📌 置顶</div>

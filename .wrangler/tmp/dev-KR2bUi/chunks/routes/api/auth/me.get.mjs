@@ -1,0 +1,2 @@
+import{f as a,a as r}from"../../../nitro/nitro.mjs";import{g as s}from"../../../_/db.mjs";import{r as t}from"../../../_/auth.mjs";import"../../../_/jwt.mjs";const e=a(async a=>{const{userId:e}=await t(a),i=s(a),m=await i.prepare("SELECT id, username, nickname, email, avatar, role, created_at FROM users WHERE id = ?").bind(e).first();if(!m)throw r({statusCode:404,message:"用户不存在"});return{user:m}});export{e as default};
+//# sourceMappingURL=me.get.mjs.map

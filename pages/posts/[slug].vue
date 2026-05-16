@@ -6,7 +6,7 @@
       <div class="fixed top-0 left-0 h-0.5 bg-blue-500 z-50" :style="{ width: progress + '%' }"></div>
 
       <!-- 封面图 -->
-      <img :src="post.cover || `/api/cover/${post.slug}`" :alt="post.title" class="w-full h-48 sm:h-64 object-cover rounded-xl mb-6 bg-gray-200 dark:bg-gray-700" />
+      <object :data="post.cover || `/api/cover/${post.slug}`" type="image/svg+xml" class="w-full h-48 sm:h-64 rounded-xl mb-6 bg-gray-200 dark:bg-gray-700"></object>
 
       <h1 class="text-2xl md:text-3xl font-bold mb-3">{{ post.title }}</h1>
       <p class="text-sm text-gray-500 mb-6 flex items-center gap-2 flex-wrap">

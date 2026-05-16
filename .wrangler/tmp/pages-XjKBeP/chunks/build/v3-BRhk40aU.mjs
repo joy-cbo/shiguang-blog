@@ -1,0 +1,2 @@
+import{t as e,v as t}from"./server.mjs";import{G as n,e as r}from"../routes/renderer.mjs";function useHead(o,s={}){const u=function(n){var o;const s=n||e();return(null==(o=null==s?void 0:s.ssrContext)?void 0:o.head)||(null==s?void 0:s.runWithContext(()=>{if(t.hasInjectionContext())return t.inject(r)}))}(s.nuxt);if(u)return n(o,{head:u,...s})}export{useHead as u};
+//# sourceMappingURL=v3-BRhk40aU.mjs.map

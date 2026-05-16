@@ -1,0 +1,2 @@
+import{f as r}from"../../nitro/nitro.mjs";import{g as a}from"../../_/db.mjs";import{r as s}from"../../_/auth.mjs";import{c as t}from"../../_/rate-limit.mjs";import"../../_/jwt.mjs";const e=r(async r=>{await s(r);const e=r.headers.get("x-forwarded-for")||"";e&&t(`users:${e}`,20,60);const m=a(r);return{users:(await m.prepare("SELECT id, username, nickname, email, avatar, role, status, created_at FROM users ORDER BY id").all()).results||[]}});export{e as default};
+//# sourceMappingURL=index.get8.mjs.map

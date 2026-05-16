@@ -1,0 +1,2 @@
+import{f as r}from"../../nitro/nitro.mjs";import{g as t}from"../../_/db.mjs";import{r as a}from"../../_/auth.mjs";import{c as s}from"../../_/rate-limit.mjs";import"../../_/jwt.mjs";const o=r(async r=>{await a(r);const o=r.headers.get("x-forwarded-for")||"";o&&s(`pages:${o}`,20,60);const e=t(r);return{pages:(await e.prepare("SELECT * FROM pages ORDER BY created_at DESC").all()).results||[]}});export{o as default};
+//# sourceMappingURL=index.get4.mjs.map

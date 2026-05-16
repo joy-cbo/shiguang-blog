@@ -1,0 +1,2 @@
+import{f as l}from"../../nitro/nitro.mjs";import{r as o}from"../../_/auth.mjs";import"../../_/jwt.mjs";const t=l(async l=>{var t;await o(l);const e=null==(t=l.context)?void 0:t.cloudflare,n=null==e?void 0:e.env,s=null==e?void 0:e.ctx,a=globalThis.__env__,r=globalThis.DB;return{hasCloudflareContext:!!e,envKeys:n?Object.keys(n):[],hasGlobalEnv:!!a,globalEnvKeys:a?Object.keys(a):[],hasGlobalDB:!!r,ctxEnvKeys:(null==s?void 0:s.env)?Object.keys(s.env):[]}});export{t as default};
+//# sourceMappingURL=debug.get.mjs.map

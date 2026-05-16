@@ -1,0 +1,2 @@
+import{f as t}from"../../nitro/nitro.mjs";import{g as a}from"../../_/db.mjs";import{r}from"../../_/auth.mjs";import{c as s}from"../../_/rate-limit.mjs";import"../../_/jwt.mjs";const m=t(async t=>{await r(t);const m=t.headers.get("x-forwarded-for")||"";m&&s(`attachments:${m}`,20,60);const o=a(t);return{attachments:(await o.prepare("SELECT * FROM attachments ORDER BY created_at DESC LIMIT 100").all()).results||[]}});export{m as default};
+//# sourceMappingURL=index.get.mjs.map

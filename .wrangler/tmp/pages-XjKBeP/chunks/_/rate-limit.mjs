@@ -1,0 +1,2 @@
+import{a as t}from"../nitro/nitro.mjs";const e=new Map;function checkRateLimit(o,s,n){const a=Date.now(),i=e.get(o);if(!i)return void e.set(o,{tokens:s-1,lastRefill:a});const l=(a-i.lastRefill)/1e3,f=Math.floor(l*(s/n));if(i.tokens=Math.min(s,i.tokens+f),i.lastRefill=a,i.tokens<=0)throw t({statusCode:429,message:"请求太频繁，请稍后再试"});if(i.tokens--,Math.random()<.001){const t=a-2e3*n;for(const[o,s]of e)s.lastRefill<t&&e.delete(o)}}export{checkRateLimit as c};
+//# sourceMappingURL=rate-limit.mjs.map

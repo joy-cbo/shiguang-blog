@@ -1,0 +1,2 @@
+import{a as o}from"../nitro/nitro.mjs";function getDB(l){var n,t,e,i,u;const s=null==(t=null==(n=l.context)?void 0:n.cloudflare)?void 0:t.env,v=null==(i=null==(e=l.context)?void 0:e.cloudflare)?void 0:i.ctx,d=globalThis.__env__,r=(null==s?void 0:s.DB)||(null==d?void 0:d.DB)||(null==(u=null==v?void 0:v.env)?void 0:u.DB)||globalThis.DB;if(!r){const l=s?Object.keys(s).join(", "):"none";throw o({statusCode:500,message:`数据库未连接，请检查 D1 绑定。可用绑定：[${l}]`})}return r}export{getDB as g};
+//# sourceMappingURL=db.mjs.map

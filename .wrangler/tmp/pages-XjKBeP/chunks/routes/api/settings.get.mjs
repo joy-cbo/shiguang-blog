@@ -1,0 +1,2 @@
+import{f as o}from"../../nitro/nitro.mjs";import{g as s}from"../../_/db.mjs";const e=["admin_email","notify_email","notify_webhook_url","smtp_password","smtp_user"],t=o(async o=>{const t=s(o),r=await t.prepare("SELECT key, value FROM site_config").all(),a={};for(const o of r.results||[])e.includes(o.key)||(a[o.key]=o.value);return a});export{t as default};
+//# sourceMappingURL=settings.get.mjs.map
