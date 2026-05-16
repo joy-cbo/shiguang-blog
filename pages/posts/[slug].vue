@@ -40,7 +40,7 @@
       </div>
 
       <!-- 上一篇/下一篇 -->
-      <div class="flex justify-between border-t dark:border-gray-700 pt-4 mb-8 text-sm">
+      <div v-if="prev || next" class="flex justify-between border-t dark:border-gray-700 pt-4 mb-8 text-sm">
         <NuxtLink v-if="prev" :to="`/posts/${prev.slug}`" class="text-blue-500 hover:underline">← {{ prev.title }}</NuxtLink>
         <span v-else class="text-gray-400"></span>
         <NuxtLink v-if="next" :to="`/posts/${next.slug}`" class="text-blue-500 hover:underline">{{ next.title }} →</NuxtLink>
