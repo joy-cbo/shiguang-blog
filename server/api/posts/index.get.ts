@@ -10,6 +10,8 @@ export default defineEventHandler(async (event) => {
   const category = q.category as string
   const tag = q.tag as string
   const search = q.search as string
+  const before = parseInt(q.before as string) || 0
+  const after = parseInt(q.after as string) || 0
   const offset = (page - 1) * limit
 
   // 非 published 状态需要认证
@@ -29,6 +31,8 @@ export default defineEventHandler(async (event) => {
   if (category) { where += ' AND c.slug = ?'; params.push(category) }
   if (tag) { where += ' AND t.slug = ?'; params.push(tag) }
   if (search) { where += ' AND (p.title LIKE ? OR p.content LIKE ?)'; params.push(`%${search}%`, `%${search}%`) }
+  if (before) { where += ' AND p.id < ?'; params.push(before) }
+  if (after) { where += ' AND p.id > ?'; params.push(after) }
 
   const countRow = await db.prepare(`
     SELECT COUNT(DISTINCT p.id) as cnt FROM posts p
@@ -49,7 +53,7 @@ export default defineEventHandler(async (event) => {
     LEFT JOIN post_tags pt ON p.id = pt.post_id
     LEFT JOIN tags t ON pt.tag_id = t.id
     ${where}
-    ORDER BY p.is_pinned DESC, p.created_at DESC
+    ORDER BY ${before ? 'p.id DESC' : after ? 'p.id ASC' : 'p.is_pinned DESC, p.created_at DESC'}
     LIMIT ? OFFSET ?
   `).bind(...params, limit, offset).all() as { results?: any[] }
 
