@@ -8,7 +8,7 @@
       <!-- 封面图 -->
       <img :src="post.cover || `/api/cover/${post.slug}`" :alt="post.title" class="w-full h-48 sm:h-64 object-cover rounded-xl mb-6 bg-gray-200 dark:bg-gray-700" />
 
-      <h1 class="text-3xl font-bold mb-3">{{ post.title }}</h1>
+      <h1 class="text-2xl md:text-3xl font-bold mb-3">{{ post.title }}</h1>
       <p class="text-sm text-gray-500 mb-6 flex items-center gap-2 flex-wrap">
         <img v-if="post.author_avatar" :src="post.author_avatar" class="w-5 h-5 rounded-full" />
         <span>{{ post.author_nickname || '匿名' }}</span>
