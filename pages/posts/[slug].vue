@@ -24,7 +24,7 @@
         <NuxtLink v-for="t in post.tags" :key="t.id" :to="`/tags/${t.slug}`" class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-xs hover:bg-blue-100 dark:hover:bg-blue-900">{{ t.name }}</NuxtLink>
       </div>
 
-      <div v-html="post.content" class="prose dark:prose-invert max-w-none mb-10"></div>
+      <div v-html="renderedContent" class="prose dark:prose-invert max-w-none mb-10"></div>
 
       <!-- 作者卡片 -->
       <div class="border-t dark:border-gray-700 pt-6 mt-6 mb-8">
@@ -54,6 +54,8 @@
 </template>
 
 <script setup lang="ts">
+import { marked } from 'marked'
+
 const route = useRoute()
 const { formatDate } = useFormat()
 const { prev, next, fetchNav } = usePostNav()
@@ -61,6 +63,11 @@ const post = ref<any>(null)
 const loading = ref(true)
 const showTop = ref(false)
 const progress = ref(0)
+
+const renderedContent = computed(() => {
+  if (!post.value?.content) return ''
+  return marked(post.value.content)
+})
 
 onMounted(async () => {
   const data = await $fetch<{ post: any }>(`/api/posts/${route.params.slug}`)
