@@ -1,6 +1,7 @@
 // POST /api/links — 创建友链
 import { requireAuth } from '~~/server/utils/auth'
 import { checkRateLimit } from '~~/server/utils/rate-limit'
+import { sanitize } from '~~/server/utils/sanitize'
 
 export default defineEventHandler(async (event) => {
   await requireAuth(event)
@@ -14,6 +15,6 @@ export default defineEventHandler(async (event) => {
   const db = getDB(event)
   await db.prepare(
     'INSERT INTO links (name, url, logo, description, sort_order) VALUES (?, ?, ?, ?, ?)'
-  ).bind(name, url, logo || '', description || '', sort_order || 0).run()
+  ).bind(sanitize(name), sanitize(url), sanitize(logo || ''), sanitize(description || ''), sort_order || 0).run()
   return { success: true }
 })

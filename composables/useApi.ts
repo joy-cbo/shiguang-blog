@@ -21,7 +21,9 @@ export function useApi() {
   function handleError(e: unknown, fallback = '操作失败'): string {
     const err = e as { data?: { message?: string }; message?: string }
     const msg = err?.data?.message || err?.message || fallback
-    if (typeof window !== 'undefined') console.error(`[API Error] ${msg}`)
+    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+      console.error(`[API Error] ${msg}`)
+    }
     return msg
   }
 

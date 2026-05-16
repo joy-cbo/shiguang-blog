@@ -1,6 +1,7 @@
 // POST /api/social-links — 创建社交链接
 import { requireAuth } from '~~/server/utils/auth'
 import { checkRateLimit } from '~~/server/utils/rate-limit'
+import { sanitize } from '~~/server/utils/sanitize'
 
 export default defineEventHandler(async (event) => {
   await requireAuth(event)
@@ -12,6 +13,6 @@ export default defineEventHandler(async (event) => {
   const db = getDB(event)
   await db.prepare(
     'INSERT INTO social_links (platform, url, icon, sort_order, visible) VALUES (?, ?, ?, ?, ?)'
-  ).bind(platform, url, icon || '', sort_order || 0, visible ?? 1).run()
+  ).bind(sanitize(platform), sanitize(url), sanitize(icon || ''), sort_order || 0, visible ?? 1).run()
   return { success: true }
 })

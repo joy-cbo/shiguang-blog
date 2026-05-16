@@ -1,8 +1,12 @@
 // GET /api/visits/stats — 访问统计（地区分布）
 import { requireAuth } from '~~/server/utils/auth'
+import { checkRateLimit } from '~~/server/utils/rate-limit'
 
 export default defineEventHandler(async (event) => {
   await requireAuth(event)
+
+  const ip = event.headers.get('x-forwarded-for') || ''
+  if (ip) checkRateLimit(`visit-stats:${ip}`, 20, 60)
   const db = getDB(event)
   const today = new Date().toISOString().slice(0, 10)
 

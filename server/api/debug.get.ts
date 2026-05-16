@@ -1,5 +1,8 @@
-// 诊断接口 — 检查环境变量和绑定
+// 诊断接口 — 仅管理员可访问
+import { requireAuth } from '~~/server/utils/auth'
+
 export default defineEventHandler(async (event) => {
+  await requireAuth(event)
   const cf = (event.context as any)?.cloudflare
   const env = cf?.env
   const ctx = cf?.ctx

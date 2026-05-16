@@ -55,6 +55,7 @@
 
 <script setup lang="ts">
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 const route = useRoute()
 const { formatDate } = useFormat()
@@ -66,7 +67,7 @@ const progress = ref(0)
 
 const renderedContent = computed(() => {
   if (!post.value?.content) return ''
-  return marked(post.value.content)
+  return DOMPurify.sanitize(marked(post.value.content))
 })
 
 onMounted(async () => {

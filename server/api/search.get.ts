@@ -1,5 +1,9 @@
 // GET /api/search?q=关键词 — 文章搜索
+import { checkRateLimit } from '~~/server/utils/rate-limit'
+
 export default defineEventHandler(async (event) => {
+  const ip = event.headers.get('x-forwarded-for') || ''
+  if (ip) checkRateLimit(`search:${ip}`, 30, 60)
   const q = (getQuery(event).q as string || '').trim()
   if (!q || q.length < 2) return { results: [], total: 0 }
 

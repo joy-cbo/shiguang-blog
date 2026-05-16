@@ -1,4 +1,6 @@
-// GET /api/posts — 文章列表（公开，分页+筛选）
+// GET /api/posts — 文章列表（公开仅published，非公开需认证）
+import { requireAuth } from '~~/server/utils/auth'
+
 export default defineEventHandler(async (event) => {
   const db = getDB(event)
   const q = getQuery(event)
@@ -9,6 +11,11 @@ export default defineEventHandler(async (event) => {
   const tag = q.tag as string
   const search = q.search as string
   const offset = (page - 1) * limit
+
+  // 非 published 状态需要认证
+  if (status !== 'published') {
+    await requireAuth(event)
+  }
 
   let where: string
   const params: any[] = []

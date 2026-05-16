@@ -1,8 +1,12 @@
 // GET /api/visits — 访问列表（管理端）
 import { requireAuth } from '~~/server/utils/auth'
+import { checkRateLimit } from '~~/server/utils/rate-limit'
 
 export default defineEventHandler(async (event) => {
   await requireAuth(event)
+
+  const ip = event.headers.get('x-forwarded-for') || ''
+  if (ip) checkRateLimit(`visits:${ip}`, 20, 60)
   const db = getDB(event)
   const q = getQuery(event)
   const page = Math.max(1, parseInt(q.page as string) || 1)
